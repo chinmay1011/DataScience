@@ -1,0 +1,70 @@
+Data Operations
+Add new column
+movie_genres['isComedy'] = movies['genres'].str.contains('Comedy') add a new column 'isComedy' with a boolean value.
+
+Add new row
+
+Slicing out the columns
+1. tags['tag'] returns the 'tag' column from tags dataframe.
+2. movies[['title','genres']] returns the columns 'title' and 'genres' from the movies dataframe.
+
+Slicing out the rows
+1. ratings[-10:] returns the last 10 rows from the ratings dataframe.
+2. ratings[100:1000] returns the rows from range 100 to 1000 from the ratings dataframe.
+3. ratings[:100] returns the rows until 100 from the ratings dataframe.
+
+value_counts function
+tag_counts = tags['tag'].value_counts() returns the count for each tag in tags dataframe.
+
+str.contains function
+is_animation = movies['genres'].str.contains('Animation') creates a boolean filter for the movies with genres 
+'Animation'.
+
+
+Group by and aggregate function
+1. ratings[['movieId','rating']].groupby('rating').count() counts the number of movieId for each rating in the ratings 
+dataframe.
+2. average_rating = ratings[['movieId','rating']].groupby('movieId').mean() group by the 'movieId' and calculates the 
+mean rating for each movieId.
+3. movie_count = ratings[['movieId','rating']].groupby('movieId').count() counts the number of rating for each movieId.
+
+
+Merging Dataframes(http://pandas.pydata.org/pandas-docs/stable/merging.html)
+1. pd.concat([df1,df2]) is used to stack the two dataframe and create a new dataframe out of it. The index for
+resulting dataframe will have row indexes from the original dataframes preserved. If the two dataframes concatenated have
+different columns, resulting dataframe will have all the columns from both the dataframes represented.
+
+Inner join using concat function
+pd.concat([df1,df2], axis=1, join='inner') combines the column values for two dataframe into new dataframe.
+Note: the concat() function keeps the duplicate key columns as it horizontaly combines the two dataframes.
+
+Alternative to concat() is append function, it works similarly but it is function of dataframe itself.
+df1.append(df2)
+
+Inner join using merge function
+pd.merge(df1,df2,how='inner') Note: Benefit of using merge() is it eliminates the duplicate columns between DataFrames
+it joins.
+
+pd.merge(movies,tags,on='movieId', how='inner')
+'on' attribute specifies the key/keys to be used to merge the two dataframes. 'how' specifies the method of joining such as 
+left, right, outer and inner.
+
+left 	LEFT OUTER JOIN 	Use keys from left frame only
+right 	RIGHT OUTER JOIN 	Use keys from right frame only
+outer 	FULL OUTER JOIN 	Use union of keys from both frames
+inner 	INNER JOIN 		Use intersection of keys from both frames
+
+
+
+String Operations(http://pandas.pydata.org/pandas-docs/stable/text.html#text-string-methods)
+1. str.split('_') split the existing string using '_' delimiter into array of strings. By passing expand=True it returns 
+dataframe instead of series of list.
+2. str.contains('2') check if the character is in the string and returns True.
+3. str.replace('_','#') replaces the '_' character with '#' in the string.
+4. str.extract('(\d)') returns the first match it finds for the regular expression in a string.
+
+Parse Unix time(int64) to readable timestamp
+tags['parsed_time'] = pd.to_datetime(tags['timestamp'], unit='s')
+
+How to sort the table based on the timestamp
+tags.sort_values(by='parsed_time', ascending=True)[:10]
