@@ -55,7 +55,17 @@ How to choose to stopping criterion?
 2. When the number of samples change in clusters is below a certain threshold, say one percent for example.
 
 
+What are packages needed for K-Means clustering?
+from sklearn.preprocessing import StandardScaler 
+from sklearn.cluster import KMeans - to import the K-means clustering algorithm
 
+X = StandardScaler().fit_transform(select_df) - to scale the value in the feature to make it comparable.
 
+kmeans = KMeans(n_clusters=12) - n_cluster specifies the number of cluster that we want to create.
+model = kmeans.fit(X) - fit() method is used to generate the model by passing the scaled input.
+print("model\n", model)
 
+centers = model.cluster_centers_ -  to get the centroids for each cluster.
+
+parallel_coordinates(data, 'prediction', color = my_colors, marker='o') - is used to plot the parallel coordinate plot to visualize the clustering of the data.
 
