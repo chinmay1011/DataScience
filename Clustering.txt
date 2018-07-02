@@ -1,0 +1,61 @@
+Clustering
+1. In cluster analysis, the goal is to organize similar items in your data set into groups, or clusters.
+2. By segmenting your data into clusters, you can analyze each cluster more carefully.
+3. The goal of cluster analysis is to segment data so that the differences between samples in the same cluster are minimized, And the differences between samples of 
+different clusters are maximized.
+
+
+Some things to note about cluster analysis are:
+1. Unlike classification and regression in general, cluster analysis is an unsupervised task. This means that there is no target label for any sample in the data set.
+
+A very common application of cluster analysis that we have discussed before is to divide your customer base into segments based on their purchase histories.
+
+Cluster analysis requires some sort of metric to measure similarity between two samples.
+Some common similarity measures are:
+1. Euclidean distance
+2. Manhattan distance
+3. Cosine similarity
+
+Note: Since distance measures such as Euclidean distance are often used to measure similarity between samples in clustering algorithms, note that it may be necessary
+to normalize the input variables so that no one value dominates the similarity calculation.
+
+
+K-Means clustering 
+K-means is a classic algorithm used for cluster analysis.
+
+Steps of k-Means algorithm:
+1. Select k initial centroids. A centroid is simply the center of a cluster. 
+2. Assign each sample to closest centroid. 
+3. Calculate the mean of the cluster to determine the new centroid.
+4. Repeat step2 and step3, until the stopping criteria is reached.
+
+How are the initial centroid selected?
+Issues is the final cluster are sensitive to initial centroids. Solution is to run k-means multiple times with different random initial centroid and choose the best 
+results.
+
+How to evaluate clustering results?
+1. To evaluate the cluster results an error measure known as the Within-Cluster Sum of Squared Error can be used. 
+2. The error associated with a sample within a cluster is the distance between the sample and the cluster centroid. 
+3. The squared error for the sample then is the square of that distance.
+4. We sum up all the squared errors for all samples for a cluster to get the squared error for that cluster.
+5. We then do the same thing for all clusters to get the final calculation for the Within-Cluster Sum of Squared Error(WSSE) for all clusters in the results of a 
+cluster analysis run.
+
+One with lower WSSE is better numerically.
+
+How to choose value for K?
+1. Visualization techniques can be used to examine the data set to see if there are natural groupings of the samples.Scatterplots and the use of dimensionality reduction 
+are useful here to visualize the data.
+2. A good value for k is application dependent.
+3. There are also Data-Driven methods for determining the value of k. These methods calculate some metric for different values of k to determine the best selection 
+for k. One of such method is Elbow method.
+
+How to choose to stopping criterion?
+1. No changes to the centroid
+2. When the number of samples change in clusters is below a certain threshold, say one percent for example.
+
+
+
+
+
+
